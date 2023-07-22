@@ -10,7 +10,6 @@ class Encounter:
         self.player = player
         self.enemy = enemy
         self.round_counter = 0
-        self.PAUSETIME = 2
         self._player_action = None
         
     @property
