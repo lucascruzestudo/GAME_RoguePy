@@ -2,10 +2,11 @@ from random import random
 
 class Entity:
     
-    def __init__(self, name, health, damage):
+    def __init__(self, name, health, damage, level):
         self._name = name.upper()
         self._health = health
         self._damage = damage
+        self._level = level
         
     @property
     def name(self):
@@ -23,6 +24,10 @@ class Entity:
     def damage(self):
         return self._damage
     
+    @property
+    def level(self):
+        return self._level
+    
     def is_alive(self):
         return self.health > 0
     
@@ -35,10 +40,10 @@ class Entity:
         self.health -= amount
     
 class Player(Entity):
-    def __init__(self, name, health, damage, crit_odd, crit_amp):
-        super().__init__(name, health, damage)
-        self._crit_odd = crit_odd
-        self._crit_amp = crit_amp
+    def __init__(self, name, health=100.0, damage=1, level=1):
+        super().__init__(name, health, damage, level)
+        self._crit_odd = 0.05
+        self._crit_amp = 1.25
         
     def attack(self, target):
             print(f"{self.name} attacks {target.name}!")
@@ -66,5 +71,5 @@ class Player(Entity):
         self._crit_amp = new_value
 
 class Enemy(Entity):
-    def __init__(self, name, health, damage):
-        super().__init__(name, health, damage)
+    def __init__(self, name, health, damage, level):
+        super().__init__(name, health, damage, level)

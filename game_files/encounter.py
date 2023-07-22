@@ -4,7 +4,7 @@ class Encounter:
         self.enemy = enemy
 
     def start(self):
-        print("An encounter has started!")
+        print(f"A {self.enemy.name} engages!\n")
         while self.player.is_alive() and self.enemy.is_alive():
             self.player.attack(self.enemy)
             if self.enemy.is_alive():
