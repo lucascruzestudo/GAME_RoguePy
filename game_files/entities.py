@@ -11,7 +11,7 @@ class Entity:
         
     @property
     def name(self):
-        return Fore.GREEN + Style.BRIGHT + self._name + Style.RESET_ALL
+        return Fore.YELLOW + Style.BRIGHT + self._name + Style.RESET_ALL
     
     @property
     def health(self):
