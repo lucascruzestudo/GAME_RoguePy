@@ -10,24 +10,18 @@ class Encounter:
         self.player = player
         self.enemy = enemy
         self.round_counter = 0
-        self._fled = False
         self.PAUSETIME = 2
+        self._player_action = None
         
     @property
-    def fled(self):
-        return self._fled
+    def player_action(self):
+        return self._player_action
     
-    @fled.setter
-    def fled(self, value):
-        self._fled = value
-
-    def print_status(self):
+    @player_action.setter
+    def player_action(self, value):
+        self._player_action = value
         
-        print(f"{self.player.name} HP: {Fore.RED}{self.player.health}{Style.RESET_ALL}")
-        print(f"{self.enemy.name} HP: {Fore.RED}{self.enemy.health}{Style.RESET_ALL}\n")
-
-    def player_turn(self):
-        
+    def pre_turn(self):
         print("Choose your action:")
         print(Style.BRIGHT)
         print(f"1. Attack")
@@ -36,47 +30,74 @@ class Encounter:
 
         while True:
             choice = input("Enter your choice: ")
-            
+
             if choice == "1":
-                self.player.attack(self.enemy)
-    
+                self.player_action = "attack"
                 break
             elif choice == "2":
-                self.fled = True
+                self.player_action = "flee"
                 break
             else:
                 print("Invalid choice. Try again.")
-
-    def enemy_turn(self):
+                
+    def execute_turn(self):
         
-        self.enemy.attack(self.player)
+        os.system('clear||cls')
+        
+        if self.player_action == "attack":
+            self.player.attack(self.enemy)
             
+        self.enemy.attack(self.player)
+        
+        sleep(PAUSE_DURATION)
 
-
+    def battle_status(self):
+        
+        print(f"{self.player.name} HP: {Fore.RED}{self.player.health}{Style.RESET_ALL}")
+        print(f"{self.enemy.name} HP: {Fore.RED}{self.enemy.health}{Style.RESET_ALL}\n")
+            
     def start(self):
         
-        print(f"{Fore.YELLOW}{Style.BRIGHT}{self.enemy.name}{Style.RESET_ALL} engages!\n")
+        os.system('clear||cls')
 
-        while self.player.is_alive() and self.enemy.is_alive() and self.fled == False:
+        print(f"{self.enemy.name} engages!\n")
+        
+        sleep(PAUSE_DURATION)
+
+
+        while self.player.is_alive() and self.enemy.is_alive():
+            
+            os.system('clear||cls')
             
             self.round_counter += 1
 
             print(f"--- Round {self.round_counter} ---")
-            self.print_status()
-            
-            self.player_turn()
+            self.battle_status()
 
-            if self.enemy.is_alive() and not self.fled:
-                self.enemy_turn()
+            self.pre_turn()
+
+            if self.player_action == "flee":
+                break
+
+            self.execute_turn()
             
+            self.player_action = None
+
         self.end()
 
     def end(self):
         
-        if self.fled == True:
+        os.system('clear||cls')
+        
+        if self.player_action == "flee":
             print(f"{self.player.name} fled the battle.")
         elif self.player.is_alive():
             print(f"{self.player.name} has defeated {self.enemy.name}!")
         else:
             print(f"{self.enemy.name} has defeated {self.player.name}!")
+            
+        sleep(PAUSE_DURATION)
+
+            
+        os.system('clear||cls')
             
