@@ -4,8 +4,8 @@ import random
 from time import sleep
 
 
-# nome = input("Informe o nome do guerreiro: ")
-plr = Player('AA')
+nome = input("Informe o nome do guerreiro: ")
+plr = Player(nome)
 print("Prepare-se para a maior batalha de sua vida...")
 sleep(1)
 
