@@ -1,13 +1,18 @@
 from game_files.entities import *
 from game_files.encounter import *
-from colorama import Fore, Style, init
+from colorama import Fore, Style, init as colorama_init
 import random
 from time import sleep
 
-init()
-nome = input("Warrior name: ")
-plr = Player(nome)
-print(f"{nome} enters the dungeon...")
+colorama_init()
+
+def game_setup():
+    nome = input("Warrior name: ")
+    plr = Player(nome)
+    return plr
+
+plr = game_setup()
+os.system('clear||cls')
 
 # inimigos
 
