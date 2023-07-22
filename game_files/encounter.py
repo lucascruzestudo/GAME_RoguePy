@@ -9,7 +9,7 @@ class Encounter:
     def __init__(self, player, enemy):
         self.player = player
         self.enemy = enemy
-        self.round_counter = 0
+        self.turn_counter = 0
         self._player_action = None
         
     @property
@@ -44,9 +44,9 @@ class Encounter:
         os.system('clear||cls')
         
         if self.player_action == "attack":
-            self.player.attack(self.enemy)
+            self.player.deal_damage(self.enemy)
             
-        self.enemy.attack(self.player)
+        self.enemy.deal_damage(self.player)
         
         sleep(PAUSE_DURATION)
 
@@ -68,9 +68,9 @@ class Encounter:
             
             os.system('clear||cls')
             
-            self.round_counter += 1
+            self.turn_counter += 1
 
-            print(f"--- Round {self.round_counter} ---")
+            print(f"--- Turn {self.turn_counter} ---")
             self.battle_status()
 
             self.pre_turn()
