@@ -1,10 +1,10 @@
 from game_files.entities import *
 from game_files.encounter import *
-from colorama import Fore, Style
+from colorama import Fore, Style, init
 import random
 from time import sleep
 
-
+init()
 nome = input("Warrior name: ")
 plr = Player(nome)
 print(f"{nome} enters the dungeon...")
