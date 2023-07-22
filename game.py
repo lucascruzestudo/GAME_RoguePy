@@ -1,5 +1,6 @@
 from game_files.entities import *
 from game_files.encounter import *
+from game_files.enemy_table import enemies
 from colorama import Fore, Style, init as colorama_init
 import random
 from time import sleep
@@ -8,26 +9,17 @@ colorama_init()
 
 def game_setup():
     nome = input("Warrior name: ")
-    plr = Player(nome)
+    plr = Player(name=nome, health=100.0, attack=10, defense=2)
     return plr
 
 plr = game_setup()
 os.system('clear||cls')
 
-# inimigos
-
-#nome, vida, dano, nivel
-enemies_list = [
-    Enemy('Slime', 10.0, 1, 1),
-    Enemy('Ogre', 50.0, 1, 2),
-]
-
-
-while plr.is_alive() and enemies_list:
+while plr.is_alive() and enemies:
     
-    selected_enemy = random.choice(enemies_list)
+    selected_enemy = random.choice(enemies)
     
-    enemies_list.remove(selected_enemy)
+    enemies.remove(selected_enemy)
     
     encounter = Encounter(plr, selected_enemy)
     encounter.start()
