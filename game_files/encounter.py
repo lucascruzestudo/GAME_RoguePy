@@ -37,16 +37,18 @@ class Encounter:
                 self.player_action = "flee"
                 break
             else:
-                print("Invalid choice. Try again.")
+                print("Invalid choice. Try again.\n")
                 
     def execute_turn(self):
         
-        os.system('clear||cls')
+        os.system('cls||clear')
         
         if self.player_action == "attack":
-            self.player.deal_damage(self.enemy)
+            if self.player.health > 0:
+                self.player.deal_damage(self.enemy)
             
-        self.enemy.deal_damage(self.player)
+        if self.enemy.health > 0:
+            self.enemy.deal_damage(self.player)
         
         sleep(PAUSE_DURATION)
 
@@ -57,7 +59,7 @@ class Encounter:
             
     def start(self):
         
-        os.system('clear||cls')
+        os.system('cls||clear')
 
         print(f"{self.enemy.name} engages!\n")
         
@@ -66,7 +68,7 @@ class Encounter:
 
         while self.player.is_alive() and self.enemy.is_alive():
             
-            os.system('clear||cls')
+            os.system('cls||clear')
             
             self.turn_counter += 1
 
@@ -86,7 +88,7 @@ class Encounter:
 
     def end(self):
         
-        os.system('clear||cls')
+        os.system('cls||clear')
         
         if self.player_action == "flee":
             print(f"{self.player.name} fled the battle.")
@@ -98,5 +100,5 @@ class Encounter:
         sleep(PAUSE_DURATION)
 
             
-        os.system('clear||cls')
+        os.system('cls||clear')
             
