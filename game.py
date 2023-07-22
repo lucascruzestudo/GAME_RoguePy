@@ -1,8 +1,8 @@
 from game_files.entities import *
-from game_files.encounter import *
 from game_files.enemy_table import enemies
+from game_files.event_manager import EventManager
 from colorama import Fore, Style, init as colorama_init
-import random
+import random, os
 from time import sleep
 
 colorama_init()
@@ -13,7 +13,9 @@ def game_setup():
     return plr
 
 plr = game_setup()
+plr_manager=EventManager(plr)
 os.system('clear||cls')
+
 
 while plr.is_alive() and enemies:
     
@@ -21,9 +23,7 @@ while plr.is_alive() and enemies:
     
     enemies.remove(selected_enemy)
     
-    encounter = Encounter(plr, selected_enemy)
-    encounter.start()
-    del encounter
+    plr_manager.handle_encounter(selected_enemy)
 
 if plr.is_alive():
     print(f"{plr.name} ESCAPED THE DUNGEON!")
