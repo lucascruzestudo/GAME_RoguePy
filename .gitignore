@@ -1,2 +1,5 @@
 /__pycache__
 /game_files/__pycache__
+/dist
+/build
+game.spec
