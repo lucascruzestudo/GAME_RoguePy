@@ -1,4 +1,5 @@
 from random import random
+from colorama import Fore, Style
 
 class Entity:
     
@@ -10,7 +11,7 @@ class Entity:
         
     @property
     def name(self):
-        return self._name
+        return Fore.GREEN + Style.BRIGHT + self._name + Style.RESET_ALL
     
     @property
     def health(self):
@@ -36,23 +37,33 @@ class Entity:
             target.receive_damage(self.damage)
 
     def receive_damage(self, amount):
-        print(f"{self.name} took {amount} damage.\n")
+        formatted_damage = f"{Fore.RED}{Style.BRIGHT}{amount}{Style.RESET_ALL}"
+        print(f"{self.name} took {formatted_damage} damage.\n")
         self.health -= amount
     
 class Player(Entity):
     def __init__(self, name, health=100.0, damage=1, level=1):
         super().__init__(name, health, damage, level)
-        self._crit_odd = 0.05
+        self._crit_odd = 1
         self._crit_amp = 1.25
         
+    @staticmethod
+    def _critical_hit_message():
+        return Fore.RED + Style.BRIGHT + "CRITICAL HIT!" + Style.RESET_ALL
+        
     def attack(self, target):
+        
             print(f"{self.name} attacks {target.name}!")
             crit_floor = random()
             if crit_floor <= self.crit_odd:
-                print("Critical hit!".upper())
+                print(self._critical_hit_message())
                 target.receive_damage(self.damage * self.crit_amp)
             else:
                 target.receive_damage(self.damage)
+                
+    @property
+    def name(self):
+        return Fore.BLUE + Style.BRIGHT + self._name + Style.RESET_ALL
                 
     @property
     def crit_odd(self):
