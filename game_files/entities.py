@@ -33,13 +33,13 @@ class Entity:
         return self.health > 0
     
     def deal_damage(self, target):
-            print(f"{self.name} attacks {target.name}!")
-            damage_range = uniform(0.8, 1.2)
-            mod_attack = self.attack * damage_range
-            target.receive_damage(mod_attack)
+        print(f"{self.name} attacks {target.name}!")
+        damage_range = uniform(0.8, 1.2)
+        mod_attack = self.attack * damage_range
+        target.receive_damage(mod_attack)
 
     def receive_damage(self, attack):
-        attack = attack / self.defense
+        attack = attack ** 2 / (attack + self.defense)
         attack = round(attack * 4) / 4 
         damage = f"{Fore.RED}{Style.BRIGHT}{attack}{Style.RESET_ALL}"
         print(f"{self.name} took {damage} damage.\n")
