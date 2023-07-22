@@ -5,11 +5,6 @@ import os
 PAUSE_DURATION = 3
 
 class Encounter:
-    
-    @staticmethod
-    def clear():
-        sleep(PAUSE_DURATION)
-        os.system('cls||clear')
 
     def __init__(self, player, enemy):
         self.player = player
@@ -42,8 +37,6 @@ class Encounter:
         while True:
             choice = input("Enter your choice: ")
             
-            self.clear()
-            
             if choice == "1":
                 self.player.attack(self.enemy)
     
@@ -62,13 +55,9 @@ class Encounter:
 
     def start(self):
         
-        self.clear()
-
         print(f"{Fore.YELLOW}{Style.BRIGHT}{self.enemy.name}{Style.RESET_ALL} engages!\n")
 
         while self.player.is_alive() and self.enemy.is_alive() and self.fled == False:
-            
-            self.clear()
             
             self.round_counter += 1
 
@@ -84,14 +73,10 @@ class Encounter:
 
     def end(self):
         
-        os.system('cls||clear')
-        
         if self.fled == True:
             print(f"{self.player.name} fled the battle.")
         elif self.player.is_alive():
             print(f"{self.player.name} has defeated {self.enemy.name}!")
         else:
             print(f"{self.enemy.name} has defeated {self.player.name}!")
-            
-        self.clear()
             
