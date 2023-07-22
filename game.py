@@ -68,3 +68,5 @@ else:
                  \_|_|_|_|_|_|_|_|
     """
     print(f"{Fore.RED}{Style.BRIGHT}{img}{Style.RESET_ALL}")
+
+input()
