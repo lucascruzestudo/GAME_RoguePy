@@ -1,12 +1,13 @@
 from game_files.entities import *
 from game_files.encounter import *
+from colorama import Fore, Style
 import random
 from time import sleep
 
 
-nome = input("Informe o nome do guerreiro: ")
+nome = input("Warrior name: ")
 plr = Player(nome)
-print("Prepare-se para a maior batalha de sua vida...")
+print(f"{nome} enters the dungeon...")
 sleep(1)
 
 # inimigos
@@ -14,7 +15,7 @@ sleep(1)
 #nome, vida, dano, nivel
 enemies_list = [
     Enemy('Slime', 10.0, 1, 1),
-    Enemy('Ogre', 5.0, 1, 2),
+    Enemy('Ogre', 50.0, 1, 2),
 ]
 
 
@@ -29,6 +30,41 @@ while plr.is_alive() and enemies_list:
     del encounter
 
 if plr.is_alive():
-    print(f"{plr.name} SURVIVED THE HORDE!")
+    print(f"{plr.name} ESCAPED THE DUNGEON!")
+    
+    img = """
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⣀⠀⢀⣶⣿⡛⠛⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠛⢛⣿⣶⡄⠀⣀⠀⠀
+⠀⠀⣿⣧⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣼⣿⠀⠀
+⠀⠀⣿⡏⠉⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠉⢹⣿⠀⠀
+⠀⠀⢻⣧⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⣼⡏⠀⠀
+⠀⠀⠘⣿⡄⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⢰⣿⠃⠀⠀
+⠀⠀⠀⠹⣷⡀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⢠⣿⡏⠀⠀⠀
+⠀⠀⠀⠀⢻⣿⣄⢀⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⣠⣿⡟⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠙⣿⣾⡿⠋⠻⣿⣿⣿⣿⣿⣿⣿⣿⠟⠙⢿⣿⣿⠏⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⠻⠟⠀⠀⠀⢹⣿⣿⣿⣿⡏⠀⠀⠀⠻⠟⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣿⣿⣿⣿⡟⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠛⠛⠛⠛⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀
+    """
+    print(f"{Fore.YELLOW}{Style.BRIGHT}{img}{Style.RESET_ALL}")
+    
 else:
-    print(f"{plr.name} DIED!")
+    print(f"{plr.name} died inside the dungeon.")
+    
+    img = """
+       @@@@@@@@@@@@@@@@@@
+     @@@@@@@@@@@@@@@@@@@@@@@
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ @@@@@@@@@@@@@@@/      \@@@/   @
+@@@@@@@@@@@@@@@@\      @@  @___@
+@@@@@@@@@@@@@ @@@@@@@@@@  | \@@@@@
+@@@@@@@@@@@@@ @@@@@@@@@\__@_/@@@@@
+ @@@@@@@@@@@@@@@/,/,/./'/_|.\'\,\
+   @@@@@@@@@@@@@|  | | | | | | | |
+                 \_|_|_|_|_|_|_|_|
+    """
+    print(f"{Fore.RED}{Style.BRIGHT}{img}{Style.RESET_ALL}")
