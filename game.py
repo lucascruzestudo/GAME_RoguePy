@@ -8,7 +8,6 @@ from time import sleep
 nome = input("Warrior name: ")
 plr = Player(nome)
 print(f"{nome} enters the dungeon...")
-sleep(1)
 
 # inimigos
 
