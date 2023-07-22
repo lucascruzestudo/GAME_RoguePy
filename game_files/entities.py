@@ -1,6 +1,6 @@
 from random import random
 
-class Character:
+class Entity:
     
     def __init__(self, name, health, damage):
         self._name = name.upper()
@@ -34,7 +34,7 @@ class Character:
         print(f"{self.name} took {amount} damage.\n")
         self.health -= amount
     
-class Player(Character):
+class Player(Entity):
     def __init__(self, name, health, damage, crit_odd, crit_amp):
         super().__init__(name, health, damage)
         self._crit_odd = crit_odd
@@ -65,6 +65,6 @@ class Player(Character):
     def crit_amp(self, new_value):
         self._crit_amp = new_value
 
-class Enemy(Character):
+class Enemy(Entity):
     def __init__(self, name, health, damage):
         super().__init__(name, health, damage)
