@@ -1,6 +1,5 @@
 from game_files.entities import *
-from game_files.enemy_table import enemies
-from game_files.event_manager import EventManager
+from game_files.managers import *
 import random, os
 from time import sleep
 
@@ -12,11 +11,11 @@ def game_setup():
     return plr
 
 plr = game_setup()
-plr_manager=EventManager(plr)
+game_manager=GameManager(plr)
 os.system('clear||cls')
 
 
-plr_manager.start()
+game_manager.start()
 
 print('\n')
 input("Press any key to exit...")
