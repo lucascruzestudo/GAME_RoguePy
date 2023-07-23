@@ -1,4 +1,3 @@
-from colorama import Fore, Style
 from time import sleep
 import os
 from game_files.config import *
@@ -21,11 +20,9 @@ class Encounter:
 
     def pre_turn(self):
         print("Choose your action:")
-        print(Style.BRIGHT)
-        print(f"1. Attack")
+        print(f"\n1. Attack")
         print(f"2. Potion ({self.player.potions})")
-        print(f"3. Flee")
-        print(Style.RESET_ALL)
+        print(f"3. Flee\n")
 
         while True:
             choice = input("Enter your choice: ")
@@ -54,7 +51,7 @@ class Encounter:
             if self.player.health > 0 and (self.player.health < self.player.maxhealth):
                 self.player.use_potion()
             else:
-                print(f"{self.player.name} health is already at max.")
+                print(f"{self.player.name} health is already at max.\n")
 
         elif self.player_action == "fail_flee":
             print(f"{self.player.name} failed fleeing!\n")
