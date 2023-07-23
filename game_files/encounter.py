@@ -24,7 +24,8 @@ class Encounter:
         print("Choose your action:")
         print(Style.BRIGHT)
         print(f"1. Attack")
-        print(f"2. Flee")
+        print(f"2. Potion ({self.player.potions})")
+        print(f"3. Flee")
         print(Style.RESET_ALL)
 
         while True:
@@ -34,6 +35,9 @@ class Encounter:
                 self.player_action = "attack"
                 break
             elif choice == "2":
+                self.player_action = "potion"
+                break
+            elif choice == "3":
                 self.player_action = "flee"
                 break
             else:
@@ -46,6 +50,12 @@ class Encounter:
         if self.player_action == "attack":
             if self.player.health > 0:
                 self.player.deal_damage(self.enemy)
+                
+        if self.player_action == "potion":
+            if self.player.health > 0 and (self.player.health < self.player.maxhealth):
+                self.player.use_potion()
+            else:
+                print(f"{self.player.name} health is already at max.")
             
         if self.enemy.health > 0:
             self.enemy.deal_damage(self.player)
@@ -54,8 +64,8 @@ class Encounter:
 
     def battle_status(self):
         
-        print(f"{self.player.name} HP: {Fore.RED}{self.player.health}{Style.RESET_ALL}")
-        print(f"{self.enemy.name} HP: {Fore.RED}{self.enemy.health}{Style.RESET_ALL}\n")
+        print(self.player.show_status())
+        print(self.enemy.show_status())
             
     def start(self):
         
