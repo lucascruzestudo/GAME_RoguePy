@@ -92,8 +92,7 @@ class Encounter:
             self.pre_turn()
 
             if self.player_action == "flee":
-                success = random()
-                if success <= 0.40: # 40% flee chance
+                if self.player.odd_handler(0.40):
                     break
                 else:
                     self.player_action = "fail_flee"
