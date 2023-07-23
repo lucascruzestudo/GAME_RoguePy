@@ -73,7 +73,7 @@ class Encounter:
         
         os.system('cls||clear')
 
-        print(f"{self.enemy.name} engages!\n")
+        print(f"a {self.enemy.name} engages!\n")
         
         sleep(PAUSE_DURATION)
 
@@ -109,6 +109,7 @@ class Encounter:
             print(f"{self.player.name} fled the battle.")
         elif self.player.is_alive():
             print(f"{self.player.name} has defeated {self.enemy.name}!")
+            self.player.defeated_enemies += 1
         else:
             print(f"{self.enemy.name} has defeated {self.player.name}!")
             
