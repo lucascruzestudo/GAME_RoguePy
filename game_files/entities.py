@@ -65,7 +65,7 @@ class Player(Entity):
         super().__init__(name, health, attack, defense)
         self._crit_odd = 0.05
         self._crit_amp = 1.25
-        self._potions = 5
+        self._potions = 3
         self._current_floor = 1
         self._defeated_enemies = 0
         self._gold = 0
