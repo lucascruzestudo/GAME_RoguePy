@@ -68,6 +68,7 @@ class Player(Entity):
         self._potions = 5
         self._current_floor = 1
         self._defeated_enemies = 0
+        self._gold = 0
 
     def odd_handler(self, chance):
         floor = random()
@@ -113,6 +114,14 @@ class Player(Entity):
     @crit_odd.setter
     def crit_odd(self, new_value):
         self._crit_odd = new_value
+        
+    @property
+    def gold(self):
+        return self._gold
+
+    @gold.setter
+    def gold(self, new_value):
+        self._gold = new_value
 
     @property
     def potions(self):
