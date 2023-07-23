@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+from random import random
 from time import sleep
 import os
 
@@ -51,11 +52,14 @@ class Encounter:
             if self.player.health > 0:
                 self.player.deal_damage(self.enemy)
                 
-        if self.player_action == "potion":
+        elif self.player_action == "potion":
             if self.player.health > 0 and (self.player.health < self.player.maxhealth):
                 self.player.use_potion()
             else:
                 print(f"{self.player.name} health is already at max.")
+        
+        elif self.player_action == "fail_flee":
+            print(f"{self.player.name} failed fleeing!\n")
             
         if self.enemy.health > 0:
             self.enemy.deal_damage(self.player)
@@ -88,7 +92,11 @@ class Encounter:
             self.pre_turn()
 
             if self.player_action == "flee":
-                break
+                success = random()
+                if success <= 0.40: # 40% flee chance
+                    break
+                else:
+                    self.player_action = "fail_flee"
 
             self.execute_turn()
             
