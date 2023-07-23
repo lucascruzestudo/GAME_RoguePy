@@ -24,13 +24,22 @@ class GameManager:
                     self.player.defeated_enemies < MONSTERS_PER_FLOOR
                     and self.player.is_alive()
                 ):
+                    self.show_player_status()
                     selected_enemy_params = random.choice(enemy_pool)
                     selected_enemy = Enemy(**selected_enemy_params)
                     self.event_manager.handle_encounter(selected_enemy)
+                    self.event_manager.random_event()
                 self.next_floor()
             if self.player.current_floor > 2:
                 break
         self.end()
+        
+    def show_player_status(self):
+        system("cls||clear")
+        print(f"{self.player.name} {Fore.RED}{Style.BRIGHT}{self.player.health}/{self.player.maxhealth} HP{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}{Style.BRIGHT}{self.player.gold} GOLD {Fore.GREEN}{self.player.attack} ATK {Fore.CYAN}{self.player.defense} DEF {Style.RESET_ALL}\n")
+        print(f"\nFLOOR {self.player.current_floor} - {MONSTERS_PER_FLOOR - self.player.defeated_enemies} monsters remaining.")
+        input("Press enter to continue your adventure...")
 
     def next_floor(self):
         system("cls||clear")
@@ -70,6 +79,26 @@ class EventManager:
         encounter = Encounter(self.player, enemy)
         encounter.start()
         del encounter
+        
+    def random_event(self):
+        system("cls||clear")
+        random.choice([self.find_chest(),]) # inserir mais eventos
+        sleep(PAUSE_DURATION)
 
     def visit_shop(self):
         shop = Shop(self.player)
+    
+    def find_chest(self):
+        result = random.choice(['gold', 'potion', 'empty'])
+        if result == 'gold':
+            gold = random.randint(10,20) # tenebroso
+            print(f"{self.player.name} finds a chest containing {gold} gold!")
+            self.player.gold += gold
+        if result == 'potion':
+            potions = random.randint(1,3)
+            print(f"{self.player.name} finds a chest containing {potions} potion(s)!")
+            self.player.potions += potions
+        if result == 'empty':
+            print(f"{self.player.name} found a chest but it was empty!")
+            
+        
