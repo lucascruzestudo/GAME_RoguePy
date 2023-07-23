@@ -110,6 +110,7 @@ class Encounter:
         elif self.player.is_alive():
             print(f"{self.player.name} has defeated {self.enemy.name}!")
             self.player.defeated_enemies += 1
+            print(f"Defeat {MONSTERS_PER_FLOOR - self.player.defeated_enemies} more monsters to advance to the next floor.")
         else:
             print(f"{self.enemy.name} has defeated {self.player.name}!")
             
