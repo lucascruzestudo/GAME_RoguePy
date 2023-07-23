@@ -8,6 +8,7 @@ class Entity:
         self._health = health
         self._attack = attack
         self._defense = defense
+        self._maxhealth = health
         
     @property
     def name(self):
@@ -20,6 +21,14 @@ class Entity:
     @health.setter
     def health(self, new_value):
         self._health = new_value
+        
+    @property
+    def maxhealth(self):
+        return self._maxhealth
+    
+    @maxhealth.setter
+    def maxhealth(self, new_value):
+        self._maxhealth = new_value
     
     @property
     def attack(self):
@@ -44,12 +53,16 @@ class Entity:
         damage = f"{Fore.RED}{Style.BRIGHT}{attack}{Style.RESET_ALL}"
         print(f"{self.name} took {damage} damage.\n")
         self.health -= attack
+        
+    def show_status(self):
+        return f"{self.name} HP: {Fore.RED}{self.health}/{self.maxhealth}{Style.RESET_ALL}"
     
 class Player(Entity):
     def __init__(self, name, health, attack, defense):
         super().__init__(name, health, attack, defense)
         self._crit_odd = 0.05
         self._crit_amp = 1.25
+        self._potions = 5
         
     @staticmethod
     def _critical_hit_message():
@@ -69,6 +82,18 @@ class Player(Entity):
             else:
                 target.receive_damage(mod_attack)
                 
+    def use_potion(self):
+        
+        print(f"{self.name} uses a potion to heal {Fore.RED}20 HP{Style.RESET_ALL}.\n")
+        
+        self.potions -= 1
+        
+        if (self.health + 20) > self.maxhealth:
+            self.health = self.maxhealth
+        
+        else:
+            self.health += 20
+                
     @property
     def name(self):
         return Fore.BLUE + Style.BRIGHT + self._name + Style.RESET_ALL
@@ -81,6 +106,14 @@ class Player(Entity):
     def crit_odd(self, new_value):
         self._crit_odd = new_value
         
+    @property
+    def potions(self):
+        return self._potions
+    
+    @potions.setter
+    def potions(self, new_value):
+        self._potions = new_value    
+    
     @property
     def crit_amp(self):
         return self._crit_amp
