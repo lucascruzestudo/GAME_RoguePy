@@ -9,6 +9,7 @@ class EventManager:
     def handle_encounter(self, enemy):
         encounter = Encounter(self.player, enemy)
         encounter.start()
+        del encounter
         
     def visit_shop(self):
         shop = Shop(self.player)
