@@ -1,5 +1,5 @@
 from game_files.entities import *
-from game_files.managers import *
+from game_files.manager import *
 import os
 
 
