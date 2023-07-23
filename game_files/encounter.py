@@ -1,9 +1,7 @@
 from colorama import Fore, Style
-from random import random
 from time import sleep
 import os
-
-PAUSE_DURATION = 3
+from config import *
 
 class Encounter:
 
