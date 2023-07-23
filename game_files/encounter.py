@@ -1,7 +1,7 @@
 from colorama import Fore, Style
 from time import sleep
 import os
-from config import *
+from game_files.config import *
 
 class Encounter:
 
