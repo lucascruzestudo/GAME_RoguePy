@@ -64,6 +64,10 @@ class Player(Entity):
         self._crit_amp = 1.25
         self._potions = 5
         
+    def odd_handler(self, chance):
+        floor = random()
+        return floor <= chance
+        
     @staticmethod
     def _critical_hit_message():
         return Fore.RED + Style.BRIGHT + "CRITICAL HIT!" + Style.RESET_ALL
@@ -75,8 +79,7 @@ class Player(Entity):
             damage_range = uniform(0.8, 1.2)
             mod_attack = self.attack * damage_range
             
-            crit_floor = random()
-            if crit_floor <= self.crit_odd:
+            if self.odd_handler(self.crit_odd):
                 print(self._critical_hit_message())
                 target.receive_damage(mod_attack * self.crit_amp)
             else:
@@ -93,6 +96,8 @@ class Player(Entity):
         
         else:
             self.health += 20
+            
+
                 
     @property
     def name(self):
