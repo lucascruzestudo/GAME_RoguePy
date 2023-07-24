@@ -64,7 +64,7 @@ class GameManager:
         del encounter
 
     def random_event(self):
-        system("cls||clear")
+        clear_screen()
         random.choice([self.find_chest(),]) # insert more events
         sleep(PAUSE_DURATION)
         
@@ -84,3 +84,5 @@ class GameManager:
             self.player.potions += potions
         else:
             print(f"{self.player.name} found a chest but it was empty!")
+            
+        clear_screen()
