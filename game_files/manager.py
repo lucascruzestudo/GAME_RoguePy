@@ -19,7 +19,7 @@ class GameManager:
                 self.player.defeated_enemies < MONSTERS_PER_FLOOR
                 and self.player.is_alive()
             ):
-                self.show_player_status()
+                self.player.show_player_status()
                 selected_enemy_params = random.choice(enemy_pool)
                 selected_enemy = Enemy(**selected_enemy_params)
                 self.handle_encounter(selected_enemy)
@@ -28,13 +28,6 @@ class GameManager:
             self.next_floor()
 
         self.end()
-
-    def show_player_status(self):
-        system("cls||clear")
-        print(f"{self.player.name} {self.player.health}/{self.player.maxhealth} HP")
-        print(f"{self.player.gold} GOLD {self.player.attack} ATK {self.player.defense} DEF\n")
-        print(f"\nFLOOR {self.player.current_floor} - {MONSTERS_PER_FLOOR - self.player.defeated_enemies} monsters remaining.")
-        input("Press enter to continue your adventure...")
 
     def next_floor(self):
         system("cls||clear")
