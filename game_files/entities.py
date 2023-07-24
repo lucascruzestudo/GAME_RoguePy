@@ -46,10 +46,6 @@ class Player(Entity):
         self.current_floor = 1
         self.defeated_enemies = 0
         self.gold = 0
-        self.exp = 0
-        self.level = 1
-        self.hp_growth_factor = 0.125
-        self.init_hp = health
 
     @staticmethod
     def _critical_hit_message():
@@ -83,22 +79,11 @@ class Player(Entity):
         print(f"{self.name} uses a potion to heal {heal_amount}.\n")
         self.potions -= 1
         
-    def level_up(self):
-        self.level += 1
-        self.maxhealth = self._calculate_max_health()
-        self.health = self.maxhealth
-        print(f"{self.name} has leveled up!\n")
-        
-    def _calculate_max_health(self):
-        return round(self.init_hp * (self.level ** self.hp_growth_factor))
-    
     def show_player_status(self):
         
-        print(f"{self.name} LVL {self.level}")
+        print(f"{self.name} GOLD {self.gold}")
         print(f"{self.health}/{self.maxhealth}")
         print(f"ATK {self.attack} DEF {self.defense}")
-        print(f"GOLD {self.gold} EXP {self.exp}")
-        print()
         remaining_monsters = MONSTERS_PER_FLOOR - self.defeated_enemies
         print(f"FLOOR {self.current_floor}")
         print(f"{remaining_monsters} monsters remaining.")
