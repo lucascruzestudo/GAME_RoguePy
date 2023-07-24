@@ -41,7 +41,7 @@ class Encounter:
 
     def execute_turn(self):
 
-        os.system("cls||clear")
+        clear_screen()
 
         if self.player_action == "attack":
             if self.player.health > 0:
@@ -63,12 +63,12 @@ class Encounter:
 
     def battle_status(self):
 
-        print(self.player.show_status())
-        print(self.enemy.show_status())
+        print(self.player.show_health())
+        print(self.enemy.show_health())
 
     def start(self):
 
-        os.system("cls||clear")
+        clear_screen()
 
         print(f"a {self.enemy.name} engages!\n")
 
@@ -76,7 +76,7 @@ class Encounter:
 
         while self.player.is_alive() and self.enemy.is_alive():
 
-            os.system("cls||clear")
+            clear_screen()
 
             self.turn_counter += 1
 
@@ -99,16 +99,17 @@ class Encounter:
 
     def end(self):
 
-        os.system("cls||clear")
+        clear_screen()
 
         if self.player_action == "flee":
             print(f"{self.player.name} fled the battle.")
         elif self.player.is_alive():
             print(f"{self.player.name} has defeated {self.enemy.name}!")
             self.player.defeated_enemies += 1
+            # self.player.level_up()
         else:
             print(f"{self.enemy.name} has defeated {self.player.name}!")
 
         sleep(PAUSE_DURATION)
 
-        os.system("cls||clear")
+        clear_screen()
