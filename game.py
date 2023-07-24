@@ -1,6 +1,6 @@
 from game_files.entities import *
 from game_files.manager import *
-import os
+from game_files.config import *
 
 
 def game_setup():
@@ -11,8 +11,7 @@ def game_setup():
 
 plr = game_setup()
 game_manager = GameManager(plr)
-os.system("clear||cls")
-
+clear_screen()
 
 game_manager.start()
 
